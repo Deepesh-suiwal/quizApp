@@ -11,6 +11,7 @@ let time = 5;
 let useranswer = [];
 let dummy = [];
 let question = null
+let isquestion = false;
 
 
 
@@ -18,19 +19,24 @@ startdivbutton.addEventListener("click", startQuiz);
 
 options.forEach((option) => {
     option.addEventListener("click", storeUserAnswer);
-    
+
 
 });
 
 function storeUserAnswer(e) {
+    isquestion === true;
     useranswer.push(e.target.innerHTML);
     mainOption.classList.add("gayab")
-    
+
     console.log(useranswer);
 
-    
-}
 
+}
+function check() {
+    if (isquestion === false) {
+        useranswer.push(null)
+    }
+}
 function startQuiz() {
     startdiv.classList.add("gayab");
     quizdiv.classList.remove("gayab");
@@ -59,8 +65,9 @@ function startTime() {
                 clearInterval(a)
             }
             else {
-                
+
                 showquestionoptions()
+                check()
             }
         }
         else {
@@ -72,8 +79,9 @@ function startTime() {
 function calculateScore() {
     let finalScore = 0;
     useranswer.forEach((answer, index) => {
-        if (answer == data[index].a)
+        if (answer == data[dummy[index]].a)
             finalScore++;
+
     });
     score.children[0].innerHTML =
         "Your score is " + finalScore + "out of " + data.length;
